@@ -1,0 +1,209 @@
+<!-- <div class="flexDemoContainer">
+    <div fxLayout="row" fxLayout.xs="row" fxLayout.sm="row" fxFlex>
+      <div fxFlex> <app-product-card></app-product-card> </div>
+      <div fxFlex> <app-product-card></app-product-card> </div>
+      <div fxFlex> <app-product-card></app-product-card> </div>
+      <div fxFlex> <app-product-card></app-product-card> </div>
+      <div fxFlex> <app-product-card></app-product-card> </div>
+      
+      
+    </div>
+  </div> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Get Everything You Needed</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="./home.component.css" rel="stylesheet" />
+    </head>
+    <body>
+     
+
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container px-4 px-lg-5">
+              <a class="navbar-brand" href="">AmarStore</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://localhost:4200/">Home</a></li>
+                     
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="">All Products</a></li>
+                              <li><hr class="dropdown-divider" /></li>
+                              <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                              <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                          </ul>
+                      </li>
+                      
+                      <li class="nav-item"><a class="nav-link" href="https://github.com/kazisr">About Dev</a></li>
+                  </ul>
+                  <form>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li><a *ngIf="loginservice.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
+                      </ul>
+                    </div>
+                  </form>
+                  
+  
+                  <form class="d-flex">
+                      <button class="btn btn-outline-dark" type="button" (click)="cartItems()" data-bs-target="#cart"data-bs-toggle="modal" >
+                          <i class="bi-cart-fill me-1"></i>                          
+                           View Cart 
+                          <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartTota}}</span>
+                      </button>
+
+                      <div>
+                        <button *ngIf="loginservice.isUserLoggedIn()"  class="btn btn-outline-dark" type="button" style="position:absolute; right:10%;">                        
+                          <i class="bi bi-person-circle"></i> 
+                          {{userFromDB.userName}} 
+                      </button>
+                      </div>
+                     
+
+                  </form>
+                  
+              </div>
+          </div>
+      </nav>
+
+        <!-- Header-->
+        <header class="bg-image"  style="
+        background-image: url('https://www.provisioneronline.com/ext/resources/Issues/2021/February/seafood/0221np_coverstory_img1.jpg?1613157265');
+        height: 300px;">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <!-- <h1 class="display-4 fw-bolder">Shop in Style</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">With AmarStore</p> -->
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    
+                    <div *ngFor="let pr of products"> 
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src={{pr.productImgUrl}} alt="..."  />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{pr.productName}}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">${{(pr.productPrice*1.33).toFixed(2)}}</span>
+                                    ${{pr.productPrice}}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" (click)="addToCart(pr)">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                   
+                    
+                    
+                   
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white"><a class="nav-link" href="http://localhost:4200/adminLogin">Copyright &copy; Kazi</a></p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+
+    </body>
+
+
+    <div class="modal fade" id="cart" tabindex="-1" aria-labelledby="carttLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateStudentLabel">Your Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-image">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cart of CartData">
+                  <td class="w-25">
+                    <img src={{cart.productImgUrl}} class="img-fluid img-thumbnail" alt="Sheep">
+                  </td>
+                  <td>{{cart.productName}}</td>
+                  <td>{{cart.productPrice}}</td>
+                  <td class="qty"><input #qty [(ngModel)]="cart.productQuantity" name = "qty" ngModel type="number" class="form-control" id="id" value="1">
+                    
+                  </td>
+                  <td>{{(cart.productPrice*cart.productQuantity).toFixed(2)}}$</td>
+                  <td>
+                    <a class="bi bi-cart-plus" (click)="updateCart(cart)">
+                      <i class="fa fa-times"></i>
+                    </a>
+                    <a (click)="deleteCartDataByid(cart.productId)" class="bi bi-trash">
+                      <i class="fa fa-times"></i>
+                    </a>
+
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table> 
+            <div class="d-flex justify-content-end">
+            
+              <h5>Total: <span class="price text-success">{{(cartTotalPrice).toFixed(2)}}$</span></h5>
+            </div>
+          </div>
+          <div class="modal-footer border-top-0 d-flex justify-content-between">
+            <div class="btn-right">
+              <button (click)=checkLogin() type="button" class="btn btn-outline-dark" style="float: right;" aria-label="Close" data-bs-dismiss="modal">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</html>
