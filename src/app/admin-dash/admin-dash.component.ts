@@ -70,6 +70,7 @@ export class AdminDashComponent implements OnInit {
   getNewPID(){
     let resourse = this.http.get("http://localhost:8080/product/lastProductId");
     resourse.subscribe((data)=> this.newPID=data.toString());
+    console.log(this.newPID);
     this.newPIDint = parseInt(this.newPID);
     console.log(this.newPIDint);
     
@@ -117,6 +118,7 @@ export class AdminDashComponent implements OnInit {
     "grossAmount":0,
   
   };
+  
 
   items= {
     "productId":11,

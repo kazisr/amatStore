@@ -95,7 +95,7 @@
           </thead>
           <tbody class="table-border-bottom-0">
             <tr *ngFor="let odr of orders">
-              <td><i class="fab fa-angular fa-lg text-danger me-1"></i> <strong>#ODR{{odr.id}}</strong></td>
+              <td><i class="fab fa-angular fa-lg text-danger me-1"></i> <strong>#ODR{{odr.orderId}}</strong></td>
               <td>{{odr.userName}}</td>
               <td>
                 {{odr.userContactNumber}}
@@ -111,7 +111,7 @@
               </td>
               <td>
                 <div>
-                  <button (click)="deleteOrder(odr.id)" type="button" class="btn btn-outline-dark" data-bs-toggle="dropdown">
+                  <button (click)="deleteOrder(odr.orderId)" type="button" class="btn btn-outline-dark" data-bs-toggle="dropdown">
                     <i class="bi bi-trash"></i> Drop
                   </button>
                   
@@ -167,7 +167,7 @@
         </table> 
         <div class="d-flex justify-content-end">
         
-          <h5>Total: <span class="price text-success">{{itemss.grossAmount}}$</span></h5>
+          <h2>Total: <span class="price text-success">{{odr.grossAmount}}$</span></h2>
         </div>
       </div>
       <div class="modal-footer border-top-0 d-flex justify-content-between">

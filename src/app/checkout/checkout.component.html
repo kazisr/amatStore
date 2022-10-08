@@ -58,7 +58,8 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    
+    <div class="container" >
         <div class="py-5 text-center">
           
           <h2>Checkout form</h2>
@@ -110,15 +111,12 @@
               <div class="row">
 
                 <div class="col-md-6 mb-3">
-                  <label for="id">Order ID</label>
+                  <label for="orderId">Order ID</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">#ODR</span>
                     </div>
-                    <input name="id" [(ngModel)]="this.newOrderIdInt" type="text" class="form-control" required readonly>
-                    <div class="invalid-feedback" style="width: 100%;">
-                      Your Order Id is required.
-                    </div>
+                    <input name="orderId" [(ngModel)]="newOrderIdInt" type="text" class="form-control" required readonly>
                   </div>
                 </div>
 
@@ -203,31 +201,20 @@
                   </div>
                 </div>
                
-                <div class="col-md-3 mb-3">
-                  <label for="zip">Zip</label>
-                  <input name="zip" [ngModel]="userFromDB.zip" class="form-select" required>
-                  <div class="invalid-feedback">
-                    Zip code required.
-                  </div>
-                </div>
+                
               </div>
               <hr class="mb-4">
       
-              <h4 class="mb-3">Payment</h4>
+
       
-              <div class="d-block my-3" name="paymentMethod" [ngModel]="userFromDB.paymentMethod">
-                <div class="custom-control custom-radio" >
-                  <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                  <label class="custom-control-label" for="credit">Credit card</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="debit">Debit card</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="paypal">Cash on delivery</label>
-                </div>
+              <div class="d-block my-3" name="paymentMethod">
+                <label for="zip"><h4 class="mb-3">Payment</h4></label>
+                <select name="paymentMethod" [ngModel]="userFromDB.paymentMethod" class="form-select" required="required">
+                  <option selected>Cash on Delivery</option>
+                  <option>Credit Card</option>
+                  <option>Debit Card</option>
+                </select>
+                
               </div>
               <!-- <div class="row">
                 <div class="col-md-6 mb-3">
@@ -267,9 +254,7 @@
             </form>
           </div>
         </div>
-      
-       
-      </div>
+    </div>
 
     <footer class="py-5 bg-dark">
         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Kazi</p></div>

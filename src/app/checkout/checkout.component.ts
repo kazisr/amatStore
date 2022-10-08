@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { ListFormat } from 'typescript';
 import { AuthenticationService } from '../Services/authentication.service';
 import Swal from 'sweetalert2';
+import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
+
 export class CheckoutComponent implements OnInit {
 
 
@@ -22,7 +24,9 @@ export class CheckoutComponent implements OnInit {
   qty:any;
   userFromDB:any;
   newOrderId:any;
-  newOrderIdInt = 0; 
+  newOrderIdInt=0; 
+
+
   
   constructor(private http:HttpClient, private router:Router,public loginservice: AuthenticationService) { }
 
@@ -68,7 +72,8 @@ export class CheckoutComponent implements OnInit {
     let resourse = this.http.get("http://localhost:8080/orders/newOrderId");
     resourse.subscribe((data)=> this.newOrderId=data.toString());
     console.log(this.newOrderId);
-    this.newOrderIdInt = parseInt(this.newOrderId);
+    this.newOrderIdInt = Math.floor(Math.random()*100);
+    console.log("genOrderId");
     console.log(this.newOrderIdInt);
     
   }
@@ -76,8 +81,7 @@ export class CheckoutComponent implements OnInit {
 
   placeOrder(order:any){
     console.log("aay haay");
-    console.log(order.id);
-    
+    console.log(order.orderId);
     order.items = this.CartData;
     order.grossAmount = this.cartTotalPrice.toFixed(2);
     
@@ -116,7 +120,7 @@ export class CheckoutComponent implements OnInit {
 
   
   order = {
-    "id":11,
+    "orderId":11,
     "userFirstName":"",
     "userLastName":"",
     "userName":"",
@@ -125,7 +129,7 @@ export class CheckoutComponent implements OnInit {
     "city":"",
     "country":"",
     "zip":"",
-    "paymentMethode":"",
+    "paymentMethod":"",
     "items":ListFormat,
     "grossAmount":0,
   

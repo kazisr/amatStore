@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {MatRadioModule} from '@angular/material/radio';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,6 +15,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,11 @@ import { AdminDashComponent } from './admin-dash/admin-dash.component';
     MatCardModule,
     MatButtonModule,
     FlexModule,
-    FormsModule
+    FormsModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
 
   ],
   providers: [],
