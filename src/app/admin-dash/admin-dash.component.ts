@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AdminGardService } from '../Services/admin-gard.service';
-import { AdminauthenticationService } from '../Services/adminauthentication.service';
+import {HttpClient} from '@angular/common/http';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AdminauthenticationService} from '../Services/adminauthentication.service';
 import Swal from 'sweetalert2';
-import { ListFormat } from 'typescript';
+import {ListFormat} from 'typescript';
 
 @Component({
   selector: 'app-admin-dash',
@@ -15,12 +14,12 @@ export class AdminDashComponent implements OnInit {
   userFromDB:any;
   orders: any;
   itemss:any;
-  newPID:any;
-  newPIDint=0;
 
-  constructor(public loginservice: AdminauthenticationService, 
+
+  constructor(public loginservice: AdminauthenticationService,
              private http:HttpClient,
-             private router:Router,) { }
+             private router:Router,
+              private _changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     let resourse = this.http.get("http://localhost:8080/admin/find/"+this.loginservice.getAdmin());
@@ -45,63 +44,65 @@ export class AdminDashComponent implements OnInit {
 
   deleteOrder(ordId:any){
     this.http.post<any>('http://localhost:8080/orders/delete', ordId).subscribe({
-        next: data => { 
-          
+        next: data => {
+
         },
         error: error => {
             console.error('There was an error!  aay haaay', error);
-         
+
         }
     })
 
-    
-    Swal.fire({  
+
+    Swal.fire({
       position: 'top-end',
-      icon: 'success',  
-      title: 'Deleted',  
-      showConfirmButton: false,  
-      timer: 1500  
-    })  
-    
+      icon: 'success',
+      title: 'Deleted',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
     this.getAllOrders();
 
   }
 
   getNewPID(){
     let resourse = this.http.get("http://localhost:8080/product/lastProductId");
-    resourse.subscribe((data)=> this.newPID=data.toString());
-    console.log(this.newPID);
-    this.newPIDint = parseInt(this.newPID);
-    console.log(this.newPIDint);
-    
+    resourse.subscribe((data)=> this.items.productId =Number(data.toString()));
+    this.items.productName = '';
+    this.items.productImgUrl = '';
+    this.items.productPrice = 0;
+    this.items.productAvailable = 0;
+    this._changeDetectorRef.detectChanges();
+
   }
 
   addItem(item:any){
     this.http.post<any>('http://localhost:8080/product/add', item).subscribe({
-        next: data => { 
-          
+        next: data => {
+
         },
         error: error => {
             console.error('There was an error!  aay haaay', error);
-         
+
         }
     })
 
-    
-    Swal.fire({  
+
+    Swal.fire({
       position: 'top-end',
-      icon: 'success',  
-      title: 'New Product Added',  
-      showConfirmButton: false,  
-      timer: 1500  
-    })  
+      icon: 'success',
+      title: 'New Product Added',
+      showConfirmButton: false,
+      timer: 1500
+    })
 
     this.getNewPID();
-    
+
 
   }
 
-  
+
 
   odr = {
     "id":0,
@@ -116,17 +117,17 @@ export class AdminDashComponent implements OnInit {
     "paymentMethode":"",
     "items":ListFormat,
     "grossAmount":0,
-  
+
   };
-  
+
 
   items= {
-    "productId":11,
+    "productId":0,
     "productName":"",
     "productImgUrl":"",
     "productPrice":0,
     "productAvailable":0,
-   
+
   };
 
 }

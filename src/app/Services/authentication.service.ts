@@ -13,41 +13,37 @@ export class AuthenticationService {
 
   authenticate(username:any, password:any) {
 
-    console.log(username);
-    console.log(password);
-
     let resourse = this.http.get("http://localhost:8080/user/find/"+username);
     resourse.subscribe((data)=> this.user=data);
-    
+
 
     if(this.user!==null){
-        
+
       if (username === this.user.userName && password === this.user.password) {
         sessionStorage.setItem('username', username)
         return true;
       } else {
-        Swal.fire({  
-          position: 'center',  
-          icon: 'error',  
-          title: 'Invalid Password',  
-          showConfirmButton: false,  
-          timer: 1500  
-        }) 
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Invalid Password',
+          showConfirmButton: false,
+          timer: 1500
+        })
         return false;
       }
     }
     else{
-      console.log("Null");
-      Swal.fire({  
-        position: 'center',  
-        icon: 'error',  
-        title: 'Invalid Username',  
-        showConfirmButton: false,  
-        timer: 1500  
-      }) 
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Invalid Username',
+        showConfirmButton: false,
+        timer: 1500
+      })
       return false;
     }
-    
+
   }
 
   getUser(){
@@ -60,7 +56,6 @@ export class AuthenticationService {
 
   isUserLoggedIn() {
     let user = sessionStorage.getItem('username')
-    console.log(!(user === null))
     return !(user === null)
   }
 

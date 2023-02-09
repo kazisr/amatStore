@@ -24,7 +24,7 @@
 
     </head>
     <body>
-     
+
  <!-- Navigation-->
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
@@ -33,8 +33,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a *ngIf="loginservice.isAdminLoggedIn()"class="nav-link active" aria-current="page" href="http://localhost:4200/adminDash">Dashboard</a></li>
-<!--                
-                <li class="nav-item dropdown"> 
+<!--
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="">All Products</a></li>
@@ -43,7 +43,7 @@
                         <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                     </ul>
                 </li> -->
-                
+
                 <li class="nav-item"><a class="nav-link" href="https://github.com/kazisr">About Dev</a></li>
             </ul>
             <form>
@@ -53,24 +53,24 @@
                 </ul>
               </div>
             </form>
-            
+
 
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="button" (click)="getNewPID()" data-bs-target="#addItem"data-bs-toggle="modal" >
-                    <i class="bi bi-plus-square"></i>                          
+                    <i class="bi bi-plus-square"></i>
                      Add Items
                 </button>
 
                 <div>
-                    <button *ngIf="loginservice.isAdminLoggedIn()"  class="btn btn-outline-dark" type="button" style="position:absolute; right:10%;">                        
-                      <i class="bi bi-person-circle"></i> 
-                      {{userFromDB.userName}} 
+                    <button *ngIf="loginservice.isAdminLoggedIn()"  class="btn btn-outline-dark" type="button" style="position:absolute; right:10%;">
+                      <i class="bi bi-person-circle"></i>
+                      {{userFromDB.userName}}
                   </button>
                   </div>
-              
+
 
             </form>
-            
+
         </div>
     </div>
 </nav>
@@ -106,7 +106,7 @@
                   <button type="button" class="btn btn-outline-dark" (click)="orderDetails(odr)" data-bs-target="#cart"data-bs-toggle="modal">
                     <i class="bi bi-list-ul"></i> Details
                   </button>
-                  
+
                 </div>
               </td>
               <td>
@@ -114,7 +114,7 @@
                   <button (click)="deleteOrder(odr.orderId)" type="button" class="btn btn-outline-dark" data-bs-toggle="dropdown">
                     <i class="bi bi-trash"></i> Drop
                   </button>
-                  
+
                 </div>
               </td>
             </tr>
@@ -123,7 +123,7 @@
     </div>
 </div>
 </div>
-        
+
 <div class="modal fade" id="cart" tabindex="-1" aria-labelledby="carttLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -162,11 +162,11 @@
                 </a> -->
               </td>
             </tr>
-            
+
           </tbody>
-        </table> 
+        </table>
         <div class="d-flex justify-content-end">
-        
+
           <h2>Total: <span class="price text-success">{{odr.grossAmount}}$</span></h2>
         </div>
       </div>
@@ -192,9 +192,9 @@
           <form #updateForm = "ngForm" (ngSubmit)="addItem(updateForm.value)" class="row g-1">
             <div class="col-md-4">
               <label for = "productId"class="form-label">ID</label>
-              <input name = "productId" [(ngModel)] = "newPIDint"  type="text" class="form-control" required readonly>
+              <input name = "productId" [(ngModel)] = "items.productId"  type="text" class="form-control" required readonly>
             </div>
-            
+
             <div class="col-md-8">
               <label for = "productName" class="form-label">Product Name</label>
               <input name = "productName" [(ngModel)] = "items.productName"  type="text" class="form-control" required>
@@ -211,7 +211,7 @@
                 <input name = "productPrice" [(ngModel)] = "items.productPrice" type="text" class="form-control"  required>
               </div>
 
-              
+
 
               <div class="col-md-7">
                 <label for = "productAvailable" class="form-label">Quantity</label>

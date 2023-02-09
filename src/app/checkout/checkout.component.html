@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://localhost:4200/">Home</a></li>
-                   
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -25,7 +25,7 @@
                             <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item"><a class="nav-link" href="https://github.com/kazisr">About Dev</a></li>
                 </ul>
                 <form>
@@ -35,36 +35,36 @@
                     </ul>
                   </div>
                 </form>
-                
+
 
                 <form class="d-flex">
                     <button class="btn btn-outline-dark" type="button" (click)="cartItems()" data-bs-target="#cart"data-bs-toggle="modal" >
-                        <i class="bi-cart-fill me-1"></i>                          
-                         View Cart 
+                        <i class="bi-cart-fill me-1"></i>
+                         View Cart
                         <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartTota}}</span>
                     </button>
 
                     <div>
-                        <button *ngIf="loginservice.isUserLoggedIn()"  class="btn btn-outline-dark" type="button" style="position:absolute; right:10%;">                        
-                          <i class="bi bi-person-circle"></i> 
-                          {{userFromDB.userName}} 
+                        <button *ngIf="loginservice.isUserLoggedIn()"  class="btn btn-outline-dark" type="button" style="position:absolute; right:10%;">
+                          <i class="bi bi-person-circle"></i>
+                          {{userFromDB?.userName}}
                       </button>
                     </div>
 
                 </form>
 
-                
-                
+
+
             </div>
         </div>
     </nav>
-    
+
     <div class="container" >
         <div class="py-5 text-center">
-          
+
           <h2>Checkout form</h2>
         </div>
-      
+
         <div class="row">
           <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -82,7 +82,7 @@
                 </div>
                 <span class="text-muted">${{(cart.productPrice*cart.productQuantity).toFixed(2)}}</span>
               </li>
-             
+
               <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">
                   <h6 class="my-0">Promo code</h6>
@@ -92,10 +92,10 @@
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (USD)</span>
-                <strong>${{cartTotalPrice.toFixed(2)}}</strong>
+                <strong>${{cartTotalPrice?.toFixed(2)}}</strong>
               </li>
             </ul>
-      
+
             <form class="card p-2" >
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Promo code">
@@ -116,7 +116,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">#ODR</span>
                     </div>
-                    <input name="orderId" [(ngModel)]="newOrderIdInt" type="text" class="form-control" required readonly>
+                    <input name="orderId" [(ngModel)]="newOrderId" type="text" class="form-control" required readonly>
                   </div>
                 </div>
 
@@ -127,7 +127,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">@</span>
                     </div>
-                    <input name="userName" [ngModel]="userFromDB.userName" type="text" class="form-control" required readonly>
+                    <input name="userName" [ngModel]="userFromDB?.userName" type="text" class="form-control" required readonly>
                     <div class="invalid-feedback" style="width: 100%;">
                       Your username is required.
                     </div>
@@ -136,31 +136,31 @@
 
                 <div class="col-md-6 mb-3">
                   <label for="userFirstName" class="form-label">First name</label>
-                  <input name="userFirstName" [ngModel]="userFromDB.userFirstName" type="text" class="form-control" required>
+                  <input name="userFirstName" [ngModel]="userFromDB?.userFirstName" type="text" class="form-control" required>
                   <div class="invalid-feedback">
                     Valid first name is required.
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="userLastName" class="form-label">Last name</label>
-                  <input name="userLastName" [ngModel]="userFromDB.userLastName" type="text" class="form-control" required >
+                  <input name="userLastName" [ngModel]="userFromDB?.userLastName" type="text" class="form-control" required >
                   <div class="invalid-feedback">
                     Valid last name is required.
                   </div>
                 </div>
               </div>
-      
+
               <div class="mb-3">
                 <label for="userEmail">Email <span class="text-muted">(Optional)</span></label>
-                <input name="userEmail" [ngModel]="userFromDB.userEmail" type="text" class="form-control">
+                <input name="userEmail" [ngModel]="userFromDB?.userEmail" type="text" class="form-control">
                 <div class="invalid-feedback">
                   Please enter a valid email address for shipping updates.
                 </div>
               </div>
-      
+
               <div class="col-md-6 mb-3">
                 <label for="userContactNumber">Contact Number</label>
-                <input name="userContactNumber" [ngModel]="userFromDB.userContactNumber" type="text" class="form-control" required>
+                <input name="userContactNumber" [ngModel]="userFromDB?.userContactNumber" type="text" class="form-control" required>
                 <div class="invalid-feedback">
                   Valid contact number is required.
                 </div>
@@ -168,16 +168,16 @@
 
               <div class="mb-3">
                 <label for="userAddress">Address</label>
-                <input name="userAddress" [ngModel]="userFromDB.userAddress" type="text" class="form-control"  required>
+                <input name="userAddress" [ngModel]="userFromDB?.userAddress" type="text" class="form-control"  required>
                 <div class="invalid-feedback">
                   Please enter your shipping address.
                 </div>
               </div>
-      
+
               <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="city">City</label>
-                    <select name="city" [ngModel]="userFromDB.city" class="form-select" required="required">
+                    <select name="city" [ngModel]="userFromDB?.city" class="form-select" required="required">
                       <option selected>Dhaka</option>
                       <option>Barishal</option>
                       <option>Mymenshingh</option>
@@ -192,7 +192,7 @@
 
                 <div class="col-md-5 mb-3">
                   <label for="country">Country</label>
-                  <select name="country" [ngModel]="userFromDB.country" class="form-select" required>
+                  <select name="country" [ngModel]="userFromDB?.country" class="form-select" required>
                     <option selected>Bangladesh</option>
 
                   </select>
@@ -200,21 +200,21 @@
                     Please select a valid country.
                   </div>
                 </div>
-               
-                
+
+
               </div>
               <hr class="mb-4">
-      
 
-      
+
+
               <div class="d-block my-3" name="paymentMethod">
                 <label for="zip"><h4 class="mb-3">Payment</h4></label>
-                <select name="paymentMethod" [ngModel]="userFromDB.paymentMethod" class="form-select" required="required">
+                <select name="paymentMethod" [ngModel]="userFromDB?.paymentMethod" class="form-select" required="required">
                   <option selected>Cash on Delivery</option>
                   <option>Credit Card</option>
                   <option>Debit Card</option>
                 </select>
-                
+
               </div>
               <!-- <div class="row">
                 <div class="col-md-6 mb-3">

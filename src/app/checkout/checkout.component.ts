@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { ListFormat } from 'typescript';
 import { AuthenticationService } from '../Services/authentication.service';
@@ -19,16 +19,17 @@ export class CheckoutComponent implements OnInit {
   CartData:any;
   cartTota:any;
   cartTotalPrice:any;
-  dta:any;
   price:any;
   qty:any;
   userFromDB:any;
-  newOrderId:any;
-  newOrderIdInt=0; 
+  newOrderId = 0;
 
 
-  
-  constructor(private http:HttpClient, private router:Router,public loginservice: AuthenticationService) { }
+
+  constructor(private http:HttpClient,
+              private router:Router,
+              public loginservice: AuthenticationService,
+              private _changeDetectorRef: ChangeDetectorRef,) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -42,7 +43,7 @@ export class CheckoutComponent implements OnInit {
   getUser(){
     let resourse = this.http.get("http://localhost:8080/user/find/"+this.loginservice.getUser());
     resourse.subscribe((data)=> this.userFromDB=data);
-    
+
   }
 
 
@@ -53,8 +54,8 @@ export class CheckoutComponent implements OnInit {
 
    totalPrice(){
     let resourse = this.http.get("http://localhost:8080/cart/product/find/all");
-    resourse.subscribe((data)=> this.CartData=data);  
-    
+    resourse.subscribe((data)=> this.CartData=data);
+
 
   }
 
@@ -70,12 +71,12 @@ export class CheckoutComponent implements OnInit {
 
   genOrderId(){
     let resourse = this.http.get("http://localhost:8080/orders/newOrderId");
-    resourse.subscribe((data)=> this.newOrderId=data.toString());
-    console.log(this.newOrderId);
-    this.newOrderIdInt = Math.floor(Math.random()*100);
-    console.log("genOrderId");
-    console.log(this.newOrderIdInt);
-    
+    resourse.subscribe((data)=> this.newOrderId =Number((data.toString())));
+    this._changeDetectorRef.detectChanges();
+    // this.newOrderIdInt = Math.floor(Math.random()*100);
+    // console.log("genOrderId");
+    // console.log(this.newOrderIdInt);
+
   }
 
 
@@ -84,41 +85,41 @@ export class CheckoutComponent implements OnInit {
     console.log(order.orderId);
     order.items = this.CartData;
     order.grossAmount = this.cartTotalPrice.toFixed(2);
-    
+
     this.http.post<any>('http://localhost:8080/orders/add', order).subscribe({
         next: data => {
-               
-          
+
+
         },
         error: error => {
             console.error('There was an error!  aay haaay', error);
-         
+
         }
     })
 
     this.http.post<any>('http://localhost:8080/cart/clear',"").subscribe({
-      next: data => {   
+      next: data => {
       },
       error: error => {
           console.error('There was an error!  aay haaay', error);
       }
   })
 
-    Swal.fire({  
+    Swal.fire({
       position: 'top-end',
-      icon: 'success',  
-      title: 'Successfully placed the oder',  
-      showConfirmButton: false,  
-      timer: 1500  
-    })  
-    
+      icon: 'success',
+      title: 'Successfully placed the oder',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
     this.genOrderId();
 
     this.router.navigate([''])
 
   }
 
-  
+
   order = {
     "orderId":11,
     "userFirstName":"",
@@ -132,7 +133,7 @@ export class CheckoutComponent implements OnInit {
     "paymentMethod":"",
     "items":ListFormat,
     "grossAmount":0,
-  
+
   };
 
 }
