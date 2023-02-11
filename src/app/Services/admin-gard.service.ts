@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { AdminauthenticationService } from './adminauthentication.service';
+import {AdminauthenticationService} from './adminauthentication.service';
+import {AuthenticationService} from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,21 @@ import { AdminauthenticationService } from './adminauthentication.service';
 export class AdminGardService implements CanActivate{
 
   constructor(private router: Router,
-    private authService: AdminauthenticationService) { }
+              private authService: AdminauthenticationService,
+              private userGuard: AuthenticationService) {
+  }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      if (this.authService.isAdminLoggedIn()){
+      if (this.authService.isAdminLoggedIn()) {
         return true;
-  
-      }else{
+
+      } else if (this.userGuard.isUserLoggedIn()) {
+        this.router.navigate(['']);
+        return false;
+      } else {
         this.router.navigate(['adminLogin']);
-      return false;
+        return false;
       }
-  
+
     }
 }
