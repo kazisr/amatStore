@@ -17,15 +17,16 @@ export class LogoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('logout component called')
     this.authentocationService.logOut();
-    Swal.fire({  
-      position: 'center',  
-      icon: 'success',  
-      title: 'Successfully Logged Out',  
-      showConfirmButton: false,  
-      timer: 1500  
-    }) 
-  
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Successfully Logged Out',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
     this.router.navigate(['']);
   }
 

@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {AdminGardService} from './admin-gard.service';
+import {AdminauthenticationService} from './adminauthentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +11,17 @@ import Swal from 'sweetalert2';
 export class AuthenticationService {
   user: any;
 
-  constructor(private http: HttpClient,private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,
+              private adminAuthService: AdminauthenticationService) {
+  }
 
-  authenticate(username:any, password:any) {
+  authenticate(username: any, password: any) {
 
-    let resourse = this.http.get("http://localhost:8080/user/find/"+username);
-    resourse.subscribe((data)=> this.user=data);
+    let resourse = this.http.get("http://localhost:8080/user/find/" + username);
+    resourse.subscribe((data) => this.user = data);
 
 
-    if(this.user!==null){
+    if (this.user !== null) {
 
       if (username === this.user.userName && password === this.user.password) {
         sessionStorage.setItem('username', username)
@@ -55,11 +59,16 @@ export class AuthenticationService {
   }
 
   isUserLoggedIn() {
+    // if(this.adminAuthService.isAdminLoggedIn()){
+    //   this.router.navigate(['']);
+    //   return false;
+    // }
     let user = sessionStorage.getItem('username')
     return !(user === null)
   }
 
   logOut() {
-    sessionStorage.removeItem('username')
+    sessionStorage.clear();
+    console.log('logout called from service')
   }
 }
