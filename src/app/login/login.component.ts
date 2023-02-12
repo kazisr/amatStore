@@ -37,23 +37,23 @@ export class LoginComponent implements OnInit {
     this.totalPrice();
     this.cartToTal();
     this.cartToTalPrice();
-    if(sessionStorage!==null){
+    if (sessionStorage.getItem('username')) {
       this.router.navigate(['/checkout'])
     }
   }
 
-  
+
   cartItems(){
     let resourse = this.http.get("http://localhost:8080/cart/product/find/all");
     resourse.subscribe((data)=> this.CartData=data);
    }
 
-   totalPrice(){
-    let resourse = this.http.get("http://localhost:8080/cart/product/find/all");
-    resourse.subscribe((data)=> this.CartData=data);  
-    
+   totalPrice() {
+     let resourse = this.http.get("http://localhost:8080/cart/product/find/all");
+     resourse.subscribe((data) => this.CartData = data);
 
-  }
+
+   }
 
   cartToTal(){
     let cartTotalItem  = this.http.get("http://localhost:8080/cart/tota");
@@ -68,21 +68,21 @@ export class LoginComponent implements OnInit {
   checkLogin() {
     if (this.loginservice.authenticate(this.username, this.password)
     ) {
-      Swal.fire({  
-        position: 'center',  
-        icon: 'success',  
-        title: 'Successfully Logged In',  
-        showConfirmButton: false,  
-        timer: 1500  
-      })  
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Successfully Logged In',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.router.navigate(['/checkout'])
-      
+
 
       this.invalidLogin = false
     } else{
       this.invalidLogin = true
     }
-      
+
   }
 
 
@@ -92,23 +92,23 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('username', this.userData.userName)
 
     let resource = this.http.post<any>('http://localhost:8080/user/add', user).subscribe({
-        next: data => {
-               
-          
-        },
-        error: error => {
-            console.error('There was an error!  aay haaay', error);
-         
-        }
+      next: data => {
+
+
+      },
+      error: error => {
+        console.error('There was an error!  aay haaay', error);
+
+      }
     })
 
-    Swal.fire({  
-      position: 'center',  
-      icon: 'success',  
-      title: 'Account creation successfull',  
-      showConfirmButton: false,  
-      timer: 1500  
-    })  
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Account creation successfull',
+      showConfirmButton: false,
+      timer: 1500
+    })
     this.router.navigate(['/checkout'])
 
   }

@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://localhost:4200/">Home</a></li>
-               
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -16,7 +16,7 @@
                         <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="nav-item"><a class="nav-link" href="https://github.com/kazisr">About Dev</a></li>
             </ul>
             <form>
@@ -26,56 +26,60 @@
                 </ul>
               </div>
             </form>
-            
+
 
             <form class="d-flex">
-                <button class="btn btn-outline-dark" type="button" (click)="cartItems()" data-bs-target="#cart"data-bs-toggle="modal" >
-                    <i class="bi-cart-fill me-1"></i>                          
-                     View Cart 
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartTota}}</span>
-                </button>
+              <button class="btn btn-outline-dark" type="button" (click)="cartItems()" data-bs-target="#cart"
+                      data-bs-toggle="modal">
+                <i class="bi-cart-fill me-1"></i>
+                View Cart
+                <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartTota}}</span>
+              </button>
             </form>
-            
+
         </div>
     </div>
 </nav>
 
-<div style="background-image: url('../img/Permanent_Campus_at_Tejgaon.webp');">
-    <section class="vh-100 gradient-custom" style="background-color: #ffffff;background-repeat: no-repeat, repeat;background-size: cover;background-image: url()">
+  <div>
+    <section class="vh-100 gradient-custom"
+             style="background-color: #ffffff;background-repeat: no-repeat, repeat;background-size: cover;background-image: url()">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card bg-dark text-white" style="border-radius: 1rem;">
               <div class="card-body p-5 text-center">
-    
+
                 <div class="mb-md-4 mt-md-4 pb-5">
-                  
-    
+
+
                   <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                   <p class="text-white-50 mb-5">Please enter your login and password!</p>
-    
+
                   <div class="form-outline form-white mb-4">
-                    <input [(ngModel)]="username" type="email" id="typeEmailX" class="form-control form-control-lg" />
+                    <input [(ngModel)]="username" type="email" id="typeEmailX" class="form-control form-control-lg"/>
                     <label class="form-label" for="typeEmailX">Username</label>
                   </div>
-                    
+
                   <div class="form-outline form-white mb-4">
-                    <input [(ngModel)]="password" type="password" id="typePassword" class="form-control form-control-lg" />
+                    <input [(ngModel)]="password" type="password" id="typePassword"
+                           class="form-control form-control-lg"/>
                     <label class="form-label" for="typePassword">Password</label>
                   </div>
 
                   <button (click)=checkLogin() class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                  
-                  <div>   
-                    <br><br>                
-                    <button class="btn btn-outline-light btn-lg px-5" data-bs-target="#modalRegisterForm"data-bs-toggle="modal" >Create a new account</button>
+
+                  <div>
+                    <br><br>
+                    <button class="btn btn-outline-light btn-lg px-5" data-bs-target="#modalRegisterForm"
+                            data-bs-toggle="modal">Create a new account
+                    </button>
                   </div>
                   <label class="form-label" for="typeEmailX"><p class="text-white-50 mb-5">Not registered!</p></label>
-    
+
                 </div>
-    
-     
-    
+
+
               </div>
             </div>
           </div>
@@ -99,7 +103,7 @@
                 <label for = "userFirstName"class="form-label">First Name</label>
                 <input name = "userFirstName" [(ngModel)] = "userData.userFirstName"  type="text" class="form-control" required>
               </div>
-              
+
               <div class="col-md-8">
                 <label for = "userLastName" class="form-label">Last Name</label>
                 <input name = "userLastName" [(ngModel)] = "userData.userLastName"  type="text" class="form-control" required>
@@ -116,9 +120,8 @@
                   <input name = "password" [(ngModel)] = "userData.password" type="text" class="form-control"  required>
                 </div>
 
-                
 
-                <div class="col-md-7">
+              <div class="col-md-7">
                   <label for = "userEmail" class="form-label">Email</label>
                   <input name = "userEmail" [(ngModel)] = "userData.userEmail"  type="text" class="form-control" required>
                 </div>

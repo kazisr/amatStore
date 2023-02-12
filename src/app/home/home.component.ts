@@ -164,12 +164,11 @@ export class HomeComponent implements OnInit {
 
 checkLogin() {
  if (this.cartTota>0) {
-  if (this.loginservice.isUserLoggedIn()  ) {
-
+  if (this.loginservice.isUserLoggedIn()) {
     this.router.navigate(['/checkout'])
-
-  } else
+  } else {
     this.router.navigate(['/login'])
+  }
 }
 else{
   Swal.fire({
